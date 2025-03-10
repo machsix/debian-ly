@@ -1,4 +1,4 @@
-ly (1.0.2-1) unstable; urgency=medium
+ly (1.0.2) unstable; urgency=medium
 
    * Fixed an RNG bug with the Matrix animation
    * Fixed a possible overflow if the TTY ID was bigger than 99

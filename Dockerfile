@@ -24,5 +24,4 @@ RUN apt-get update && \
 
 WORKDIR /data
 
-COPY . .
 CMD make -f Makefile_deb
