@@ -1,0 +1,15 @@
+Source: ly
+Section: utils
+Priority: optional
+Maintainer: Your Name <your.email@example.com>
+Build-Depends: debhelper (>= 12), curl, git, libpam0g-dev, libxcb-xkb-dev
+Standards-Version: 1.0.2
+Homepage: https://github.com/fairyglade/ly
+Vcs-Git: https://github.com/fairyglade/ly.git
+Vcs-Browser: https://github.com/fairyglade/ly
+
+Package: ly
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, xauth, ncurses-bin
+Description: TUI display manager
+ A terminal-based display manager with a simple and easy-to-use interface.

@@ -1,0 +1,14 @@
+ly (1.0.2-1) unstable; urgency=medium
+
+   * Fixed an RNG bug with the Matrix animation
+   * Fixed a possible overflow if the TTY ID was bigger than 99
+   * Fixed ~/.profile not being loaded with the Fish shell
+   * Fixed a permission issue related to TTYs
+   * Added a missing supervise symlink with runit
+   * Fixed a bug with shell login by reverting standard error redirection to the journal on systemd
+   * Fixed the small & big clocks not updating without user input
+   * Fixed incorrect comment parsing in some cases
+   * Fixed the terminal not being cleared sometimes when shutting down or rebooting using Ly
+   * Fixed a kernel warning related to the usage of mcookie with X11-based sessions
+   * Swapped the position of /usr/bin and /usr/sbin in the path configuration option by default
+ -- machsix <machsix@github.com>  Sat, 09 Mar 2025 12:00:00 +0000

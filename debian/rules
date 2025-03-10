@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+LY_VERSION := $(shell grep "^Standards-Version" debian/control | cut -d ' ' -f 2)
+DESTDIR = $(CURDIR)/debian/ly
+%:
+	dh_clean
+	dh $@ --with=systemd
+
+override_dh_auto_configure:
+	mkdir -p zig && curl -L https://ziglang.org/download/0.12.1/zig-linux-x86_64-0.12.1.tar.xz | tar -xJf - --strip-components=1 -C $(CURDIR)/zig
+	mkdir -p src && curl -L https://github.com/fairyglade/ly/archive/refs/tags/v$(LY_VERSION).tar.gz | tar -xzf - --strip-components=1 -C $(CURDIR)/src
+
+override_dh_auto_build:
+	# Build the package with zig
+	(cd src && $(CURDIR)/zig/zig build -Ddest_directory=$(DESTDIR) -Dname="ly-dm" -Dcpu=baseline -Doptimize=ReleaseSafe)
+
+override_dh_auto_install:
+	# Run the install step with zig build
+	(cd src && $(CURDIR)/zig/zig build -Ddest_directory=$(DESTDIR) -Dname="ly-dm" -Dcpu=baseline -Doptimize=ReleaseSafe installsystemd)
+	sed -i "s;/usr/bin/ly;/usr/bin/ly-dm;g" $(DESTDIR)/usr/lib/systemd/system/ly.service
+	# Install license
+	install -Dm644 src/license.md $(DESTDIR)/usr/share/licenses/ly/WTFPL
+
+override_dh_clean:
+	dh_clean
+	rm -rf zig src
+
+.PHONY: package_version
+package_version:
+	@echo $(LY_VERSION)
