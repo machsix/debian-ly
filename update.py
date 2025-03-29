@@ -2,6 +2,7 @@
 import requests
 import json
 import datetime
+import os
 
 def get_latest_release(repo:str):
     """Get the latest release from a GitHub repository."""
@@ -12,16 +13,27 @@ def get_latest_release(repo:str):
     info = response.json()
     return info["tag_name"], info["body"], info["html_url"]
 
-def write_changelog(root_dir:str, release:str, body:str, pkg_name:str):
-    """Write the changelog to a file."""
+def update_changelog(root_dir:str, release:str, body:str, pkg_name:str):
+    lines = []
+    if os.path.exists(f"{root_dir}/debian/changelog"):
+        with open(f"{root_dir}/debian/changelog", "r") as f:
+            lines = f.readlines()
+
+        old_release = lines[0].split()[1][1:-1]
+        if old_release == release:
+            return
+
     with open(f"{root_dir}/debian/changelog", "w") as f:
         f.write(f'{pkg_name} ({release}) unstable; urgency=medium\n')
         f.write("\n")
         for line in body.splitlines():
             sline = line.strip()
             if sline and sline[0] in ['*', '+', '-']:
-                f.write(f"* {sline[1:].strip()}\n")
-        f.write(f"\n-- machsix <28209092+machsix@users.noreply.github.com> {datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0000')}\n")
+                f.write(f"  * {sline[1:].strip()}\n")
+        f.write(f"\n -- machsix <28209092+machsix@users.noreply.github.com> {datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0000')}\n")
+        if lines:
+            f.write("\n")
+            f.write('\n'.join(lines))
 
 def update_control(root_dir:str, release:str):
     """Update the control file with the new version."""
@@ -50,7 +62,7 @@ if __name__ == '__main__':
         release = release[1:]
 
     # Write the changelog
-    write_changelog(".", release, body, pkg_name)
+    update_changelog(".", release, body, pkg_name)
 
     # Update the control file
     update_control(".", release)

@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+# Stop and disable the service
+if [ "$1" = "remove" ]; then
+  systemctl stop ly.service
+  systemctl disable ly.service
+fi
+
+exit 0

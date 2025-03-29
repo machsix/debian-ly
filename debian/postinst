@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+# Restart the service if the package is being updated
+if [ "$1" = "configure" ]; then
+  if systemctl is-active --quiet ly.service; then
+    systemctl restart ly.service
+  fi
+fi
+
+exit 0

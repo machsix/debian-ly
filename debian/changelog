@@ -1,14 +1,8 @@
-ly (1.0.2) unstable; urgency=medium
+ly (1.0.3) unstable; urgency=medium
 
-   * Fixed an RNG bug with the Matrix animation
-   * Fixed a possible overflow if the TTY ID was bigger than 99
-   * Fixed ~/.profile not being loaded with the Fish shell
-   * Fixed a permission issue related to TTYs
-   * Added a missing supervise symlink with runit
-   * Fixed a bug with shell login by reverting standard error redirection to the journal on systemd
-   * Fixed the small & big clocks not updating without user input
-   * Fixed incorrect comment parsing in some cases
-   * Fixed the terminal not being cleared sometimes when shutting down or rebooting using Ly
-   * Fixed a kernel warning related to the usage of mcookie with X11-based sessions
-   * Swapped the position of /usr/bin and /usr/sbin in the path configuration option by default
- -- machsix <machsix@github.com>  Sat, 09 Mar 2025 12:00:00 +0000
+  * Support Zig 0.13.0 (this is a tad late, but supporting Zig 0.14.0 would mean breaking support for 0.12.0 and 0.13.0 which is not ideal)
+  * Try to create /etc/pam.d and /usr/bin everytime when installing
+  * Don't set XDG_CURRENT_DESKTOP and XDG_SESSION_DESKTOP if they're empty
+  * Possibly fix .Xresources not being loaded
+
+ -- machsix <28209092+machsix@users.noreply.github.com> Sat, 29 Mar 2025 01:12:08 +0000

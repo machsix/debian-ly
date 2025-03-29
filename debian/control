@@ -3,7 +3,7 @@ Section: x11
 Priority: optional
 Maintainer: machsix <28209092+machsix@users.noreply.github.com>
 Build-Depends: debhelper (>= 12), curl, git, libpam0g-dev, libxcb-xkb-dev
-Standards-Version: 1.0.2
+Standards-Version: 1.0.3
 Homepage: https://github.com/fairyglade/ly
 Vcs-Git: https://github.com/fairyglade/ly.git
 Vcs-Browser: https://github.com/fairyglade/ly

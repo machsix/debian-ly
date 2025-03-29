@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+# Actions to take after package removal
+case "$1" in
+  purge)
+    # Remove all configuration files
+    rm -rf /etc/ly
+    ;;
+esac
+
+exit 0
