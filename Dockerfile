@@ -2,7 +2,7 @@
 FROM debian:bookworm
 
 # Set the maintainer label
-LABEL maintainer="your-email@example.com"
+LABEL maintainer="28209092+machsix@users.noreply.github.com"
 
 # Set environment variables to avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive

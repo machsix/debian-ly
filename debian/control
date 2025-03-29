@@ -1,7 +1,7 @@
 Source: ly
-Section: utils
+Section: x11
 Priority: optional
-Maintainer: Your Name <your.email@example.com>
+Maintainer: machsix <28209092+machsix@users.noreply.github.com>
 Build-Depends: debhelper (>= 12), curl, git, libpam0g-dev, libxcb-xkb-dev
 Standards-Version: 1.0.2
 Homepage: https://github.com/fairyglade/ly
@@ -12,4 +12,4 @@ Package: ly
 Architecture: amd64
 Depends: ${shlibs:Depends}, ${misc:Depends}, xauth, ncurses-bin
 Description: TUI display manager
- A terminal-based display manager with a simple and easy-to-use interface.
+  Ly is a lightweight TUI (ncurses-like) display manager for Linux and BSD.
